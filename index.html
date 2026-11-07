@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230a0a0a%22/%3E%3Crect x=%221.5%22 y=%221.5%22 width=%2261%22 height=%2261%22 rx=%2211%22 fill=%22none%22 stroke=%22%23454545%22 stroke-width=%223%22/%3E%3Ctext x=%2232%22 y=%2241%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-size=%2224%22 fill=%22%23ffffff%22%3EDK%3C/text%3E%3C/svg%3E">
+  <title>Dani van der Kruijk — Information Security · GRC & Cloud Security</title>
+  <meta name="description" content="Dani van der Kruijk, student Information Security (AD) aan Hogeschool Rotterdam. Focus op GRC (ISO 27001, NEN 7510, NIS2, AVG), Cloud Security en Security Awareness.">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <!-- Opstartscherm (eenmaal per sessie, overslaan met klik of toets) -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <div class="boot-head mono"><span>dani@infosec</span><span class="boot-id" id="boot-id">SESSION 0x0000</span></div>
+      <pre class="boot-log mono" id="boot-log"></pre>
+      <div class="boot-bar"><span id="boot-bar"></span></div>
+      <p class="boot-skip mono">Klik of druk op een toets om over te slaan</p>
+    </div>
+  </div>
+
+  <!-- Interactief blueprint-raster -->
+  <canvas id="grid-canvas" aria-hidden="true"></canvas>
+
+  <a class="skip-link" href="#main">Naar de inhoud</a>
+
+  <!-- ============================================================
+       HEADER — merk, tabbladen en acties
+       ============================================================ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#over-mij" data-tab-link="over-mij" aria-label="Dani van der Kruijk — naar Over mij">
+        <span class="brand-mark" aria-hidden="true">DK</span>
+        <span class="brand-text">
+          <span class="brand-name">Dani van der Kruijk</span>
+          <span class="brand-role mono">InfoSec · GRC</span>
+        </span>
+      </a>
+
+      <nav class="tabs" role="tablist" aria-label="Secties van het CV">
+        <button class="tab" role="tab" id="tab-over-mij" data-tab="over-mij" aria-controls="over-mij" aria-selected="true">
+          <span class="tab-index mono">01</span>Over mij
+        </button>
+        <button class="tab" role="tab" id="tab-werkervaring" data-tab="werkervaring" aria-controls="werkervaring" aria-selected="false" tabindex="-1">
+          <span class="tab-index mono">02</span>Werkervaring
+        </button>
+        <button class="tab" role="tab" id="tab-opleiding" data-tab="opleiding" aria-controls="opleiding" aria-selected="false" tabindex="-1">
+          <span class="tab-index mono">03</span>Opleiding
+        </button>
+        <button class="tab" role="tab" id="tab-certificaten" data-tab="certificaten" aria-controls="certificaten" aria-selected="false" tabindex="-1">
+          <span class="tab-index mono">04</span>Certificaten
+        </button>
+        <span class="tab-indicator" aria-hidden="true"></span>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Zet je PDF als 'cv.pdf' naast index.html. Zonder dat bestand opent de printversie. -->
+        <a class="btn btn-primary" href="cv.pdf" id="download-cv" download>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+          <span>Download CV <span class="btn-hint">(PDF)</span></span>
+        </a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/dani-van-der-kruijk-200921307/" target="_blank" rel="noopener noreferrer" id="linkedin-link">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17"/><circle cx="8" cy="7.5" r="0.6" fill="currentColor"/><path d="M12 17v-6.5"/><path d="M12 13.5c0-1.8 1.2-3 2.8-3s2.7 1.1 2.7 3V17"/></svg>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         01. OVER MIJ
+         ============================================================ -->
+    <section class="panel" id="over-mij" role="tabpanel" aria-labelledby="tab-over-mij" tabindex="0">
+
+      <div class="container hero">
+        <div class="hero-text">
+          <p class="eyebrow mono">01. Over mij</p>
+          <h1 class="display" data-scramble>Dani van der Kruijk</h1>
+          <p class="hero-role">Student Information Security <span class="sep" aria-hidden="true">/</span>
+            <span class="role-static">GRC, Cloud Security &amp; Awareness</span>
+            <span class="role-rotator" aria-hidden="true"><span class="role-word" id="role-word"></span><span class="caret"></span></span>
+          </p>
+          <p class="lead">
+            Ik kies bewust voor de regie en de menselijke kant van security. Mijn kracht ligt in
+            communicatie en organisatie, met de ambitie om me te specialiseren in privacy. Met een scherp
+            oog voor het proces wil ik na mijn AD doorstromen naar de bachelor
+            Business IT &amp; Management (BIM) om de brug te slaan tussen beleid, wetgeving en praktijk.
+          </p>
+          <div class="stats" aria-label="Kerncijfers">
+            <div class="stat c-amber"><span class="stat-num" data-count="3">3</span><span class="stat-label mono">Microsoft-certificaten</span></div>
+            <div class="stat c-teal"><span class="stat-num" data-count="3" data-since="2023-08" data-suffix="+">3+</span><span class="stat-label mono">Jaar IT-ervaring</span></div>
+            <div class="stat c-violet"><span class="stat-num" data-count="4">4</span><span class="stat-label mono">Normen &amp; wetten</span></div>
+          </div>
+          <div class="tag-row">
+            <span class="tag mono">ISO 27001</span>
+            <span class="tag mono">NEN 7510</span>
+            <span class="tag mono">NIS2</span>
+            <span class="tag mono">AVG / GDPR</span>
+          </div>
+        </div>
+
+        <aside class="profile-card" aria-label="Profiel in het kort">
+          <div class="profile-photo">
+            <!-- Vervang foto.jpg door een andere profielfoto als je wilt -->
+            <img src="foto.jpg" alt="Portretfoto van Dani van der Kruijk" width="1200" height="900" decoding="async">
+          </div>
+          <dl class="kv">
+            <div><dt class="mono">Rol</dt><dd>Student Information Security</dd></div>
+            <div><dt class="mono">School</dt><dd>Hogeschool Rotterdam</dd></div>
+            <div><dt class="mono">Locatie</dt><dd>Delft, NL</dd></div>
+            <div><dt class="mono">Talen</dt><dd>Nederlands · Engels</dd></div>
+            <div><dt class="mono">Contact</dt><dd><a href="mailto:d.kruijk@outlook.com">d.kruijk@outlook.com</a></dd></div>
+            <div><dt class="mono">Status</dt><dd><span class="status-dot status-live" aria-hidden="true"></span>Open voor stage</dd></div>
+          </dl>
+        </aside>
+      </div>
+
+      <!-- Focusgebieden -->
+      <div class="band">
+        <div class="container">
+          <p class="eyebrow mono">// Focusgebieden</p>
+          <h2 class="section-title">Waar ik me op richt</h2>
+
+          <div class="grid grid-3">
+            <article class="card focus-card c-blue">
+              <span class="icon-tile"><svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 9.5 4-1.2 7-5 7-9.5V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+              <h3>GRC</h3>
+              <p>Governance, risk &amp; compliance: risicoanalyses, dreigingsanalyses en het vertalen van normen en wetgeving naar werkbaar beleid.</p>
+              <div class="tag-row">
+                <span class="tag mono">ISO 27001</span><span class="tag mono">NEN 7510</span><span class="tag mono">NIS2</span><span class="tag mono">AVG</span>
+              </div>
+            </article>
+
+            <article class="card focus-card c-teal">
+              <span class="icon-tile"><svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4 4 0 0 1 0 8.5"/><rect x="9.5" y="14" width="5" height="5" rx="1"/><path d="M10.5 14v-1.2a1.5 1.5 0 0 1 3 0V14"/></svg></span>
+              <h3>Cloud Security</h3>
+              <p>Veilig beheer van Microsoft 365 en Azure: identiteiten, toegang en compliance-instellingen, gebaseerd op praktijkervaring als systeembeheerder.</p>
+              <div class="tag-row">
+                <span class="tag mono">Microsoft 365</span><span class="tag mono">Azure</span><span class="tag mono">Entra ID</span>
+              </div>
+            </article>
+
+            <article class="card focus-card c-violet">
+              <span class="icon-tile"><svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6"/><path d="M17.5 14a5.5 5.5 0 0 1 3 5"/></svg></span>
+              <h3>Security Awareness</h3>
+              <p>Security draait om mensen. Ik maak risico's begrijpelijk en zorg dat beleid ook echt landt bij medewerkers, door heldere communicatie en presentatie.</p>
+              <div class="tag-row">
+                <span class="tag mono">Awareness</span><span class="tag mono">Training</span><span class="tag mono">Privacy</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kerncompetenties -->
+      <div class="container section">
+        <p class="eyebrow mono">// Kerncompetenties</p>
+        <h2 class="section-title">Kennis en vaardigheden</h2>
+
+        <div class="grid grid-4">
+          <div class="card comp-card c-blue">
+            <h3 class="comp-title mono">Security &amp; beleid</h3>
+            <ul class="checklist">
+              <li>Security frameworks</li>
+              <li>Risicoanalyses</li>
+              <li>Dreigingsanalyses</li>
+              <li>Privacy &amp; AVG</li>
+            </ul>
+          </div>
+          <div class="card comp-card c-teal">
+            <h3 class="comp-title mono">Cloud &amp; IT-beheer</h3>
+            <ul class="checklist">
+              <li>Microsoft 365-beheer</li>
+              <li>Netwerkbeheer</li>
+              <li>Systeembeheer &amp; databases</li>
+              <li>1e-lijns support</li>
+            </ul>
+          </div>
+          <div class="card comp-card c-violet">
+            <h3 class="comp-title mono">Persoonlijk</h3>
+            <ul class="checklist">
+              <li>Communicatie &amp; presentatie</li>
+              <li>Leiderschap &amp; organisatie</li>
+              <li>Leergierig &amp; adaptief</li>
+              <li>Procesgericht</li>
+            </ul>
+          </div>
+          <div class="card comp-card c-amber">
+            <h3 class="comp-title mono">Talen</h3>
+            <ul class="lang-list">
+              <li><span>Nederlands</span><span class="mono muted">Moedertaal</span></li>
+              <li><span>Engels</span><span class="mono muted">Vloeiend</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         02. WERKERVARING
+         ============================================================ -->
+    <section class="panel" id="werkervaring" role="tabpanel" aria-labelledby="tab-werkervaring" tabindex="0" hidden>
+      <div class="container section">
+        <p class="eyebrow mono">02. Werkervaring</p>
+        <h2 class="section-title">Praktijkervaring in IT</h2>
+        <p class="section-intro">Van hardware en klantcontact tot het beheer van Microsoft 365-omgevingen: de technische basis onder mijn focus op security en governance.</p>
+
+        <ol class="timeline">
+          <li class="timeline-item c-teal">
+            <div class="timeline-meta">
+              <span class="mono date">Jan 2025 — Heden</span>
+              <span class="tag mono tag-current"><span class="status-dot" aria-hidden="true"></span>Huidig</span>
+            </div>
+            <article class="card job-card">
+              <header class="job-head">
+                <div>
+                  <h3>Supportmedewerker</h3>
+                  <p class="job-org">De BeleefTV</p>
+                </div>
+                <svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>
+              </header>
+              <ul class="bullets">
+                <li>Assemblage en reparatie van interactieve hardware.</li>
+                <li>Verzorgen van productdemonstraties en uitleveringen op locatie.</li>
+                <li>Technisch onderhoud en softwarematige ondersteuning.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag mono">Hardware</span><span class="tag mono">Demonstraties</span><span class="tag mono">Klantcontact</span>
+              </div>
+            </article>
+          </li>
+
+          <li class="timeline-item c-blue">
+            <div class="timeline-meta">
+              <span class="mono date">Aug 2023 — Jul 2025</span>
+            </div>
+            <article class="card job-card">
+              <header class="job-head">
+                <div>
+                  <h3>ICT-Systeembeheerder</h3>
+                  <p class="job-org">Dynamic Telecom &amp; IT</p>
+                </div>
+                <svg class="icon icon-accent" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>
+              </header>
+              <ul class="bullets">
+                <li>1e-lijns support en afhandeling van klanttickets.</li>
+                <li>Beheer van Microsoft 365-omgevingen en bedrijfsapplicaties.</li>
+                <li>Ondersteuning bij netwerkbeheer en IT-engineering.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag mono">Microsoft 365</span><span class="tag mono">Ticketing</span><span class="tag mono">Netwerken</span>
+              </div>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         03. OPLEIDING
+         ============================================================ -->
+    <section class="panel" id="opleiding" role="tabpanel" aria-labelledby="tab-opleiding" tabindex="0" hidden>
+      <div class="container section">
+        <p class="eyebrow mono">03. Opleiding</p>
+        <h2 class="section-title">Opleidingen</h2>
+        <p class="section-intro">Een technische MBO-basis, nu verdiept met een HBO Associate degree in Information Security. Daarna wil ik doorstromen naar de bachelor Business IT &amp; Management.</p>
+
+        <div class="grid grid-2">
+          <article class="card edu-card c-violet">
+            <div class="edu-head">
+              <div class="logo-slot has-logo">
+                <img src="logos/hogeschool-rotterdam.png" alt="Logo Hogeschool Rotterdam" width="600" height="600" loading="lazy" decoding="async">
+              </div>
+              <div>
+                <span class="tag mono tag-current"><span class="status-dot" aria-hidden="true"></span>Huidige studie</span>
+                <h3>HBO AD Information Security</h3>
+                <p class="edu-school">Hogeschool Rotterdam</p>
+              </div>
+            </div>
+            <p class="mono date">Aug 2025 — Heden</p>
+            <p>Associate degree met de nadruk op het beveiligen van informatie binnen organisaties: van analyse van risico's en dreigingen tot het toepassen van security frameworks.</p>
+            <div class="tag-row">
+              <span class="tag mono">Security frameworks</span><span class="tag mono">Risicoanalyses</span><span class="tag mono">Dreigingsanalyses</span>
+            </div>
+          </article>
+
+          <article class="card edu-card c-amber">
+            <div class="edu-head">
+              <div class="logo-slot has-logo">
+                <img src="logos/techniek-college-rotterdam.png" alt="Logo Techniek College Rotterdam" width="836" height="308" loading="lazy" decoding="async">
+              </div>
+              <div>
+                <span class="tag mono">Diploma behaald</span>
+                <h3>MBO 4 Expert IT Systems &amp; Devices</h3>
+                <p class="edu-school">Techniek College Rotterdam</p>
+              </div>
+            </div>
+            <p class="mono date">Aug 2022 — Mei 2025</p>
+            <p>Brede technische IT-opleiding met praktijkgerichte vakken in het beheren en automatiseren van systemen en netwerken.</p>
+            <div class="tag-row">
+              <span class="tag mono">Systeembeheer</span><span class="tag mono">Netwerken</span><span class="tag mono">Databases</span><span class="tag mono">Automatisering</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         04. CERTIFICATEN
+         ============================================================ -->
+    <section class="panel" id="certificaten" role="tabpanel" aria-labelledby="tab-certificaten" tabindex="0" hidden>
+      <div class="container section">
+        <p class="eyebrow mono">// Certificaten</p>
+        <h2 class="section-title">Microsoft-certificeringen</h2>
+        <p class="section-intro">Fundamentals-certificeringen die de basis leggen onder cloud, identity en compliance in het Microsoft-ecosysteem.</p>
+
+        <div class="grid grid-3">
+          <article class="card cert-card c-blue">
+            <div class="cert-head">
+              <div class="ms-logo" role="img" aria-label="Microsoft">
+                <svg viewBox="0 0 21 21" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#F25022"/><rect x="11" y="0" width="10" height="10" fill="#7FBA00"/><rect x="0" y="11" width="10" height="10" fill="#00A4EF"/><rect x="11" y="11" width="10" height="10" fill="#FFB900"/></svg>
+                <span class="ms-wordmark">Microsoft</span>
+              </div>
+              <span class="tag mono">MS-900</span>
+            </div>
+            <p class="cert-issuer mono">Microsoft Certified</p>
+            <h3>Microsoft 365 Fundamentals</h3>
+            <p>Cloudconcepten, de diensten en apps van Microsoft 365, en hoe security, compliance en privacy daarin zijn ingericht.</p>
+          </article>
+
+          <article class="card cert-card c-violet">
+            <div class="cert-head">
+              <div class="ms-logo" role="img" aria-label="Microsoft">
+                <svg viewBox="0 0 21 21" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#F25022"/><rect x="11" y="0" width="10" height="10" fill="#7FBA00"/><rect x="0" y="11" width="10" height="10" fill="#00A4EF"/><rect x="11" y="11" width="10" height="10" fill="#FFB900"/></svg>
+                <span class="ms-wordmark">Microsoft</span>
+              </div>
+              <span class="tag mono">SC-900</span>
+            </div>
+            <p class="cert-issuer mono">Microsoft Certified</p>
+            <h3>Security, Compliance, and Identity Fundamentals</h3>
+            <p>Concepten van security, compliance en identity, met Microsoft Entra, Defender, Sentinel en Purview.</p>
+            <div class="cert-foot">
+              <a class="text-link" href="https://www.credly.com/badges/3ec008db-69e6-4b61-b1fd-d5f16d717af0/public_url" target="_blank" rel="noopener noreferrer" aria-label="Verifieer SC-900 op Credly (opent in nieuw tabblad)">
+                Verifieer op Credly
+                <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M18 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card cert-card c-teal">
+            <div class="cert-head">
+              <div class="ms-logo" role="img" aria-label="Microsoft">
+                <svg viewBox="0 0 21 21" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#F25022"/><rect x="11" y="0" width="10" height="10" fill="#7FBA00"/><rect x="0" y="11" width="10" height="10" fill="#00A4EF"/><rect x="11" y="11" width="10" height="10" fill="#FFB900"/></svg>
+                <span class="ms-wordmark">Microsoft</span>
+              </div>
+              <span class="tag mono">AZ-900</span>
+            </div>
+            <p class="cert-issuer mono">Microsoft Certified</p>
+            <h3>Azure Fundamentals</h3>
+            <p>Cloudconcepten, de architectuur en kerndiensten van Azure, en beheer en governance van cloudomgevingen.</p>
+            <div class="cert-foot">
+              <a class="text-link" href="https://www.credly.com/badges/4b53df80-6d4d-443f-96a0-3e2118f89653/public_url" target="_blank" rel="noopener noreferrer" aria-label="Verifieer AZ-900 op Credly (opent in nieuw tabblad)">
+                Verifieer op Credly
+                <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M18 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Terminal (easter egg) — open met de knop of de toets ` -->
+  <button class="term-toggle mono" id="term-toggle" type="button" aria-controls="terminal" aria-expanded="false" title="Open terminal (toets `)">
+    <span class="term-prompt">&gt;_</span><span class="term-toggle-label">terminal</span>
+  </button>
+  <div class="terminal" id="terminal" role="dialog" aria-label="Terminal" aria-modal="false" hidden>
+    <div class="term-bar">
+      <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="mono term-title">dani@infosec: ~</span>
+      <button class="term-close" id="term-close" type="button" aria-label="Sluit terminal">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="term-body mono" id="term-body" aria-live="polite"></div>
+    <form class="term-input-row mono" id="term-form" autocomplete="off">
+      <label for="term-input" class="term-ps1">dani@infosec:~$</label>
+      <input id="term-input" class="term-input" type="text" spellcheck="false" autocapitalize="off" aria-label="Commando">
+    </form>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="mono">// © <span id="year">2026</span> Dani van der Kruijk</span>
+      <span class="mono footer-hint">Druk op <kbd>`</kbd> voor de terminal</span>
+      <span class="mono">Delft, NL · <a href="mailto:d.kruijk@outlook.com">d.kruijk@outlook.com</a></span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="effects.js"></script>
+</body>
+</html>
